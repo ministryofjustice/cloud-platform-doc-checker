@@ -10,14 +10,15 @@ import (
 	ghaction "github.com/sethvargo/go-githubactions"
 )
 
-// Allow consumers to set flags during runtime
+// Require a GitHub team name at runtime.
 var (
-	team     = flag.String("team", "WebOps", "team and orgOwner are the GitHub team and organisation that we're using to validate the user.")
-	prOwner  = flag.String("user", os.Getenv("PR_OWNER"), "contains the value of an environment variable that is set in the GH action container")
-	orgOwner = flag.String("org", "ministryofjustice", "who owns the repository")
+	team = flag.String("team", "", "team and orgOwner are the GitHub team and organisation that we're using to validate the user.")
 )
 
+// Everything else has default values that most teams will use.
 var (
+	prOwner  = flag.String("owner", os.Getenv("PR_OWNER"), "contains the value of an environment variable that is set in the GH action container")
+	orgOwner = flag.String("org", "ministryofjustice", "who owns the repository")
 	fileName = flag.String("file", "changes", "the file created by a GitHub action, it contains the output of a git diff")
 	token    = flag.String("token", os.Getenv("GITHUB_OAUTH_TOKEN"), "Personal access token from GitHub.")
 )
@@ -26,8 +27,8 @@ func main() {
 	flag.Parse()
 
 	// The user must either specify or set the PR_OWNER and token environment variable.
-	if os.Getenv("GITHUB_OAUTH_TOKEN") == "" || os.Getenv("PR_OWNER") == "" {
-		log.Fatalln("you must have the GITHUB_OAUTH_TOKEN and PR_OWNER env var set.")
+	if *team == "" || *token == "" || *prOwner == "" {
+		log.Fatalln("you must have the GITHUB_OAUTH_TOKEN, PR_OWNER and team name defined.")
 	}
 
 	// Parse the pull request body file and return false if the PR has more than a review change.
