@@ -9,4 +9,4 @@ RUN go build .
 
 COPY entrypoint.sh ./entrypoint.sh
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["pwd; ./entrypoint.sh"]
+CMD ["./entrypoint.sh"]
