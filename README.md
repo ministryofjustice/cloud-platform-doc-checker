@@ -43,9 +43,6 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-      - name: owner of PR
-        run: |
-          echo "$PR_OWNER"
       - name: Run git diff against repository
         run: |
           git diff origin/main HEAD > changes
