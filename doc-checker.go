@@ -43,7 +43,7 @@ func main() {
 		log.Println("Success: The changes in this PR are only review dates and the user is valid.")
 		ghaction.SetOutput("review_pr", "true")
 	} else {
-		log.Printf("Fail: The changes in this PR are not review dates or the user is not valid.")
+		log.Printf("Fail: The changes in this PR are not review dates or the user cannot be found in %s.", *team)
 		ghaction.SetOutput("review_pr", "false")
 	}
 }
