@@ -1,12 +1,6 @@
 name: Approve document review PR
 description: Approve a document review if there is a single diff.
-inputs:
-  team:
-    description: The team to check for approvals.
-    required: true
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.team }}
