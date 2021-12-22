@@ -23,7 +23,7 @@ func main() {
 
 	// The user must either specify or set the PR_OWNER and token environment variable.
 	if *team == "" || *token == "" || *prOwner == "" {
-		log.Fatalln("you must have the GITHUB_OAUTH_TOKEN, PR_OWNER and team name defined.")
+		log.Fatalln("you must have the GITHUB_OAUTH_TOKEN, PR_OWNER and TEAM_NAME environment variables defined.")
 	}
 
 	// Parse the pull request body file and return false if the PR has more than a review change.
