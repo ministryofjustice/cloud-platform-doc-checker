@@ -13,7 +13,7 @@ https://github.com/ministryofjustice/cloud-platform-user-guide/commit/de39ec0fd5
 
 As you can see this is a fairly futile effort and time could be spent elsewhere.
 This GitHub action checks to see if the only changes contain the words `last_review_on`
-and whether the PR owner is from the Cloud Platform team. If the criteria is met the PR
+and whether the PR owner is from the team defined in the env var `TEAM_NAME`. If the criteria is met the PR
 is approved automatically.
 
 To run this GitHub action you must create a GitHub personal access token and store it in a GitHub secret
@@ -67,3 +67,18 @@ content above, exactly as shown.
 NB: You do have to duplicate the conditional as shown. Although the
 github documentation states that you can put the conditional at the
 job level, that doesn't work, in this case.
+
+## How to contribute
+
+Either fork or branch off of the repository and make your changes. All GitHub Actions must pass.
+
+PR the changes back to main.
+
+### How to release
+
+GoReleaser has been setup so it's a simple matter of creating a new tag and pushing it to the repository. A GitHub Action will create a release for you.
+
+```bash
+git tag -a v1.0.0 -m "Release 1.0.0"
+git push --tags
+```
