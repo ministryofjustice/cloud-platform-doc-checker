@@ -21,7 +21,7 @@ var (
 func main() {
 	flag.Parse()
 
-	// The user must either specify or set the PR_OWNER and token environment variable.
+	// The user must either specify or set the required environment variables
 	if *team == "" || *token == "" || *prOwner == "" {
 		log.Fatalln("you must have the GITHUB_OAUTH_TOKEN, PR_OWNER and TEAM_NAME environment variables defined.")
 	}
@@ -43,7 +43,7 @@ func main() {
 		log.Println("Success: The changes in this PR are only review dates and the user is valid.")
 		ghaction.SetOutput("review_pr", "true")
 	} else {
-		log.Println("Fail: Either the PR contains more than review date changes or the user isn't a member of the webops team.")
+		log.Printf("Fail: The changes in this PR are not review dates or the user is not valid.")
 		ghaction.SetOutput("review_pr", "false")
 	}
 }
