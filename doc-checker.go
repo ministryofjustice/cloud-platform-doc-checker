@@ -10,13 +10,8 @@ import (
 	ghaction "github.com/sethvargo/go-githubactions"
 )
 
-// Require a GitHub team name at runtime.
 var (
-	team = flag.String("team", "", "team and orgOwner are the GitHub team and organisation that we're using to validate the user.")
-)
-
-// Everything else has default values that most teams will use.
-var (
+	team     = flag.String("team", os.Getenv("TEAM_NAME"), "team and orgOwner are the GitHub team and organisation that we're using to validate the user.")
 	prOwner  = flag.String("owner", os.Getenv("PR_OWNER"), "contains the value of an environment variable that is set in the GH action container")
 	orgOwner = flag.String("org", "ministryofjustice", "who owns the repository")
 	fileName = flag.String("file", "changes", "the file created by a GitHub action, it contains the output of a git diff")
