@@ -28,6 +28,7 @@ on:
 env:
   PR_OWNER: ${{ github.event.pull_request.user.login }}
   GITHUB_OAUTH_TOKEN: ${{ secrets.DOCUMENT_REVIEW_GITHUB }}
+  TEAM_NAME: "MyTeamName"
 
 jobs:
   check-diff:
@@ -50,7 +51,7 @@ jobs:
           git diff origin/main HEAD > changes
       - name: Auto-approval check
         id: approve_pr_check
-        uses: ministryofjustice/github-actions/approve-doc-review@add-docs-check
+        uses: ministryofjustice/cloud-platform-doc-checker@VERSION
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
